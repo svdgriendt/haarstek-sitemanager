@@ -1,3 +1,4 @@
+import Bracket from "./bracket";
 import Generator from "./generator";
 
 describe('Generator validates input', () => {
@@ -23,6 +24,6 @@ describe('Generator validates input', () => {
 
 describe('Generator generates correctly', () => {
   test('Size = 2', () => {
-    expect(Generator.generate(2)).toEqual({});
+    expect(Generator.generate(2)).toEqual(new Bracket(1,2));
   });
 });
