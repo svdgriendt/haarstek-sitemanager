@@ -3,8 +3,8 @@ import Match from "./match";
 
 export default abstract class Generator {
   public static generate(size: number): Bracket {
-    if (size != 2 && size != 3) {
-      throw 'Only a size of 2 or 3 is currently supported.';
+    if (size < 2) {
+      throw 'Size must be at least 2.';
     }
 
     const numbers = Array.from(Array(size).keys(), x => x + 1);
@@ -12,25 +12,26 @@ export default abstract class Generator {
     return new Bracket(finalMatch);
   }
 
-  private static generateMatchesTree(numbers: number[]) : Match {
-    const splitMatches = Generator.splitMatches(numbers);
-
-    if (splitMatches.bottom.length == 1) {
-      return new Match(splitMatches.top[0], splitMatches.bottom[0]);
-    } else {
-      const perFinalMatch = new Match(splitMatches.bottom[0], splitMatches.bottom[1]);
-      return new Match(splitMatches.top[0], perFinalMatch);
+  private static generateMatchesTree(numbers: number[]): Match {
+    if (numbers.length === 2) {
+      return new Match(numbers[0], numbers[1]);
     }
+    if (numbers.length === 3) {
+      return new Match(numbers[0], new Match(numbers[1], numbers[2]));
+    }
+    if (numbers.length === 4) {
+      return new Match(new Match(numbers[0], numbers[3]), new Match(numbers[1], numbers[2]));
+    }
+
+    const splitMatchParts = Generator.splitMatchParts(numbers);
+    const topMatch = Generator.generateMatchesTree(splitMatchParts.top);
+    const bottomMatch = Generator.generateMatchesTree(splitMatchParts.bottom);
+    return new Match(topMatch, bottomMatch);
   }
 
-  private static splitMatches(numbers: number[]): { top: number[], bottom: number[] } {
+  private static splitMatchParts(numbers: number[]): { top: number[], bottom: number[] } {
     const numbersLength = numbers.length;
-
-    if (numbersLength < 2) {
-      throw 'Only 2 or more matches can be split.';
-    }
-
-    if (numbersLength == 2) {
+    if (numbersLength === 2) {
       return { top: [numbers[0]], bottom: [numbers[1]] };
     }
 
