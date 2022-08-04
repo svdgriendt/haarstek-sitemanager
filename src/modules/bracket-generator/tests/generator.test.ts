@@ -1,6 +1,6 @@
-import Bracket from "./bracket";
-import Generator from "./generator";
-import Match from "./match";
+import Bracket from "../bracket";
+import Generator from "../generator";
+import Match from "../match";
 
 describe('Generator validates input', () => {
   test('Input = -1', () => {
