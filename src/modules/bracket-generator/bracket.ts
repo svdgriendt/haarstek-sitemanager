@@ -1,9 +1,9 @@
-export default class Bracket {
-  public top: number;
-  public bottom: number;
+import Match from "./match";
 
-  constructor(top: number, bottom: number) {
-    this.top = top;
-    this.bottom = bottom;
+export default class Bracket {
+  public finalMatch: Match;
+
+  constructor(finalMatch: Match) {
+    this.finalMatch = finalMatch;
   }
 }
