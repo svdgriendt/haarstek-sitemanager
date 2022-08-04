@@ -13,13 +13,13 @@ describe('Generator validates input', () => {
     expect(() => Generator.generate(1)).toThrowError('Size must be at least 2.');
   });
   test('Input = 2', () => {
-    expect(() => Generator.generate(2)).toBeTruthy();
+    expect(() => Generator.generate(2)).not.toThrow();
   });
   test('Input = 3', () => {
-    expect(() => Generator.generate(3)).toBeTruthy();
+    expect(() => Generator.generate(3)).not.toThrow();
   });
   test('Input = 100', () => {
-    expect(() => Generator.generate(100)).toBeTruthy();
+    expect(() => Generator.generate(100)).not.toThrow();
   });
 });
 
