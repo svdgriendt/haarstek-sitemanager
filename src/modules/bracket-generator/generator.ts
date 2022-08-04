@@ -8,15 +8,18 @@ export default abstract class Generator {
     }
 
     const numbers = Array.from(Array(size).keys(), x => x + 1);
+    const finalMatch = Generator.generateMatchesTree(numbers);
+    return new Bracket(finalMatch);
+  }
+
+  private static generateMatchesTree(numbers: number[]) : Match {
     const splitMatches = Generator.splitMatches(numbers);
 
     if (splitMatches.bottom.length == 1) {
-      const finalMatch = new Match(splitMatches.top[0], splitMatches.bottom[0]);
-      return new Bracket(finalMatch);
+      return new Match(splitMatches.top[0], splitMatches.bottom[0]);
     } else {
       const perFinalMatch = new Match(splitMatches.bottom[0], splitMatches.bottom[1]);
-      const finalMatch = new Match(splitMatches.top[0], perFinalMatch);
-      return new Bracket(finalMatch);
+      return new Match(splitMatches.top[0], perFinalMatch);
     }
   }
 
