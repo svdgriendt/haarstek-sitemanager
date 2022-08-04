@@ -19,7 +19,7 @@ describe('Generator validates input', () => {
     expect(() => Generator.generate(3)).toBeTruthy();
   });
   test('Input = 100', () => {
-    expect(() => Generator.generate(3)).toBeTruthy();
+    expect(() => Generator.generate(100)).toBeTruthy();
   });
 });
 
