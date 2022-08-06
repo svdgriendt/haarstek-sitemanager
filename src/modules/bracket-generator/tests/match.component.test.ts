@@ -4,6 +4,10 @@ import Match from '../match';
 
 
 describe('Match component rendering', () => {
+  test('Has CSS class match', () => {
+    const wrapper = shallowMount(MatchComponent);
+    expect(wrapper.find('div').classes('match')).toEqual(true);
+  });
   test('Match = (1,2)', () => {
     const wrapper = shallowMount(MatchComponent, { props: { match: new Match(1, 2) }});
     expect(wrapper.find('span[data-position="top"]').text()).toEqual('1');

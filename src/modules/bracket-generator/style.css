@@ -1,0 +1,12 @@
+.match {
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.match > .contestant:not(:last-child) {
+  border-bottom: 1px solid gray;
+}
