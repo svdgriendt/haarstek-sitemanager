@@ -6,4 +6,8 @@ export default class Match {
     this.top = top;
     this.bottom = bottom;
   }
+
+  public static is(x?: any) : x is Match {
+    return x instanceof Match;
+  }
 }
