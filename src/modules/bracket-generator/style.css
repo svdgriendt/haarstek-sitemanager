@@ -1,12 +1,19 @@
 .match {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.match-details {
   border: 1px solid gray;
   border-radius: 0.5em;
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
+  width: 15em;
 }
 
-.match > .contestant:not(:last-child) {
-  border-bottom: 1px solid gray;
+.match-details > .contestant[data-position="bottom"] {
+  border-top: 1px solid gray;
 }
