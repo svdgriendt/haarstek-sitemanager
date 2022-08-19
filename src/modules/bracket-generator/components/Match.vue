@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import MatchModel from '../match';
 
 const props = defineProps({ match: { type: MatchModel, required: true } });
-const hasMatchModel = MatchModel.is(props.match.top) || MatchModel.is(props.match.bottom);
+const hasMatchModel = computed(() => {
+  return MatchModel.is(props.match.top) || MatchModel.is(props.match.bottom);
+});
 </script>
 
 <template>
@@ -12,7 +15,8 @@ const hasMatchModel = MatchModel.is(props.match.top) || MatchModel.is(props.matc
       <div class="contestant" data-position="bottom">{{ !MatchModel.is(match.bottom) ? match.bottom : '&nbsp;' }}</div>
     </div>
 
-    <div class="matches" :class="{ top: MatchModel.is(match.top), bottom: MatchModel.is(match.bottom) }" v-if="hasMatchModel">
+    <div class="matches" :class="{ top: MatchModel.is(match.top), bottom: MatchModel.is(match.bottom) }"
+      v-if="hasMatchModel">
       <Match data-position="top" v-if="MatchModel.is(match.top)" :match="match.top" />
       <Match data-position="bottom" v-if="MatchModel.is(match.bottom)" :match="match.bottom" />
 
