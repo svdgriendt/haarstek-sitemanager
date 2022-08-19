@@ -2,19 +2,22 @@
 import MatchModel from '../match';
 
 const props = defineProps({ match: { type: MatchModel, required: true } });
+const hasMatchModel = MatchModel.is(props.match.top) || MatchModel.is(props.match.bottom);
 </script>
 
 <template>
   <div class="match">
-    <div class="match-group" v-if="MatchModel.is(match.top) || MatchModel.is(match.bottom)">
-      <Match data-position="top" v-if="MatchModel.is(match.top)" :match="match.top" />
-      <Match data-position="bottom" v-if="MatchModel.is(match.bottom)" :match="match.bottom" />
+    <div class="contestants">
+      <div class="contestant" data-position="top">{{ !MatchModel.is(match.top) ? match.top : '&nbsp;' }}</div>
+      <div class="contestant" data-position="bottom">{{ !MatchModel.is(match.bottom) ? match.bottom : '&nbsp;' }}</div>
     </div>
 
-    <div class="match-details">
-      <span class="contestant" data-position="top">{{ !MatchModel.is(match.top) ? match.top : '&nbsp;' }}</span>
-      <span class="contestant" data-position="bottom">{{ !MatchModel.is(match.bottom) ? match.bottom : '&nbsp;'
-      }}</span>
+    <div class="matches" v-if="hasMatchModel">
+      <Match data-position="top" v-if="MatchModel.is(match.top)" :match="match.top" />
+      <Match data-position="bottom" v-if="MatchModel.is(match.bottom)" :match="match.bottom" />
+
+      <div class="match-connector left" :class="{ top: MatchModel.is(match.top), bottom: MatchModel.is(match.bottom) }"></div>
+      <div class="match-connector right"></div>
     </div>
   </div>
 </template>
